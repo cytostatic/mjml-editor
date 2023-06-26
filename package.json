@@ -4,7 +4,11 @@
     "description": "A drag&drop editor for MJML Email templates in VSCode.",
     "version": "1.0.0",
     "publisher": "cytostatic-vscode",
-    "repository": "https://github.com/cytostatic/mjml-editor",
+    "icon": "mjml-editor-icon.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cytostatic/mjml-editor"
+    },
     "engines": {
         "vscode": "^1.79.0"
     },
