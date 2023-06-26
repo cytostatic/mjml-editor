@@ -1,7 +1,7 @@
 import { basename, join } from 'path';
 import { writeFileSync } from 'fs';
 import { Disposable, ExtensionContext, TextDocument, TextDocumentChangeEvent, TextEditor, Uri, ViewColumn, WebviewPanel, commands, window, workspace } from "vscode";
-import getNonce, { isMJMLFile } from "../utils/helper";
+import getNonce, { beautifyHTML, isMJMLFile } from "../utils/helper";
 
 export class Editor {
     private openedDocument: TextDocument | null = null;
@@ -24,42 +24,41 @@ export class Editor {
 
             commands.registerCommand('mjml-editor.saveFile', () => {
                 if (this.openedDocument) {
-                    const content = '';
-                    writeFileSync(this.openedDocument.fileName, content, 'utf8');
+                    this.webview?.webview.onDidReceiveMessage(
+                        message => {
+                            switch (message.command) {
+                                case 'mjml-editor.sendEditorContent':
+                                    if (this.openedDocument) {
+                                        const mjml = beautifyHTML(message.content);
+                                        if (mjml) {
+                                            writeFileSync(this.openedDocument.fileName, mjml, 'utf8');
+                                            this.dispose();
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        },
+                        undefined,
+                        this.subscriptions
+                    );
+                    this.webview?.webview.postMessage({
+                        command: 'mjml-editor.getEditorContent',
+                    });
+
                 } else {
                     window.showErrorMessage("MJML Editor is not open.");
                 }
             }),
 
-            // workspace.onDidOpenTextDocument((document?: TextDocument) => {
-            //     if (
-            //         document &&
-            //         this.editorOpen
-            //     ) {
-            //         this.displayWebView(document);
-            //     }
-            // }),
-
-            // window.onDidChangeActiveTextEditor((editor?: TextEditor) => {
-            //     if (editor && this.editorOpen) {
-            //         this.displayWebView(editor.document);
-            //     }
-            // }),
-
-            // workspace.onDidChangeTextDocument((event?: TextDocumentChangeEvent) => {
-            //     if (
-            //         event &&
-            //         this.editorOpen
-            //     ) {
-            //         this.displayWebView(event.document);
-            //     }
-            // }),
-
-            // workspace.onDidSaveTextDocument((document?: TextDocument) => {
-            //     if (document && this.editorOpen) {
-            //         this.displayWebView(document);
-            //     }
-            // }),
+            workspace.onDidSaveTextDocument((document?: TextDocument) => {
+                if (document && this.editorOpen && this.webview) {
+                    if (this.openedDocument?.fileName === document.fileName) {
+                        this.dispose();
+                    }
+                }
+            }),
 
             workspace.onDidCloseTextDocument((document?: TextDocument) => {
                 if (document && this.editorOpen && this.webview) {
@@ -100,6 +99,8 @@ export class Editor {
             enableScripts: true,
         });
 
+        this.webview.iconPath = Uri.joinPath(this.context.extensionUri, 'assets', 'icon.svg');
+
         this.webview.onDidDispose(
             () => {
                 this.webview = undefined;
@@ -110,7 +111,7 @@ export class Editor {
             null,
             this.subscriptions,
         );
-        
+
         this.webview.webview.html = this.getWebviewContent();
 
         const fileContent: string = this.getFileContent(document);
@@ -118,10 +119,10 @@ export class Editor {
         this.webview.webview.onDidReceiveMessage(
             message => {
                 switch (message.command) {
-                    case 'fetchFileContent':
-                        this.webview?.webview.postMessage({ 
-                            command: 'sendFileContent', 
-                            content: fileContent, 
+                    case 'mjml-editor.fetchFileContent':
+                        this.webview?.webview.postMessage({
+                            command: 'mjml-editor.sendFileContent',
+                            content: fileContent,
                         });
                         break;
                     default:
@@ -157,7 +158,7 @@ export class Editor {
                     <link rel="stylesheet" href="https://stijndv.com/fonts/Eudoxus-Sans.css">
                     <title>Vscode Extension</title>
                 </head>
-                <body style="overflow: hidden;">
+                <body>
                     <div id="app"></div>
                 </body>
                 <script nonce="${nonce}" src="${reactUri}"></script>

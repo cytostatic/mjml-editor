@@ -4,6 +4,7 @@
 
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path');
 
 //@ts-check
@@ -48,6 +49,11 @@ const extensionConfig = {
     },
     plugins: [
         new webpack.ProgressPlugin(),
+        new CopyPlugin({
+            patterns: [
+                { from: "assets", to: "assets" },
+            ],
+        }),
     ]
 };
 
