@@ -15,7 +15,6 @@ jobs:
           node-version: 18
       
       - run: npm ci
-      - run: npm run vscode:prepublish
       
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v1
