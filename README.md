@@ -17,10 +17,6 @@ If you have any requirements or dependencies, add a section describing those and
 | --- | --- | --- |
 | `mjml.beautify` | ` ` | Beautify options ([available options](https://github.com/beautify-web/js-beautify#options)). |
 
-## Known Issues
-
-Missing dark mode color for context menu in layer panel.
-
 ## Release Notes
 
 ### [1.0.0]
