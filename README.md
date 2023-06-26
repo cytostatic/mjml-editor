@@ -15,7 +15,7 @@ If you have any requirements or dependencies, add a section describing those and
 
 | Name | Default | Description |
 | --- | --- | --- |
-| `mjml.beautify` | ` ` | Beautify options ([available options](https://github.com/beautify-web/js-beautify#options)). |
+| `mjml-editor.beautify` | ` ` | Beautify options ([available options](https://github.com/beautify-web/js-beautify#options)). |
 
 ## Release Notes
 
