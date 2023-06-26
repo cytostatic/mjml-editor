@@ -37,4 +37,4 @@ Main Author: Raphael Stärk ([@cytostatic](https://github.com/cytostatic))
 
 ## License
 
-This extension is licensed under the [MIT License][license-url].
+This extension is licensed under the [MIT License](https://github.com/cytostatic/mjml-editor/blob/main/LICENSE.txt).
