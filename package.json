@@ -72,7 +72,8 @@
         "lint": "eslint src --ext ts",
         "test": "node ./out/test/runTest.js",
         "publish:vs-marketplace": "vsce publish --no-dependencies",
-        "publish:open-vsx": "ovsx publish --no-dependencies"
+        "publish:open-vsx": "ovsx publish --no-dependencies",
+        "postversion": "git push && git push --tags"
     },
     "devDependencies": {
         "@types/glob": "^8.1.0",
@@ -105,7 +106,7 @@
         "@types/vscode-webview": "^1.57.1",
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
-        "easy-email-extensions": "^4.14.0",
+        "easy-email-extensions": "^4.14.1",
         "js-beautify": "^1.8.8",
         "ovsx": "^0.8.1",
         "react": "^18.2.0",
