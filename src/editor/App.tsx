@@ -34,15 +34,6 @@ const defaultCategories: ExtensionProps['categories'] = [
                 type: AdvancedType.HERO,
             },
             {
-                type: AdvancedType.ACCORDION,
-            },
-            {
-                type: AdvancedType.CAROUSEL,
-            },
-            {
-                type: AdvancedType.SOCIAL,
-            },
-            {
                 type: AdvancedType.WRAPPER,
             },
             {
@@ -50,6 +41,15 @@ const defaultCategories: ExtensionProps['categories'] = [
             },
             {
                 type: AdvancedType.NAVBAR,
+            },
+            {
+                type: AdvancedType.ACCORDION,
+            },
+            {
+                type: AdvancedType.CAROUSEL,
+            },
+            {
+                type: AdvancedType.SOCIAL,
             },
         ],
     },
