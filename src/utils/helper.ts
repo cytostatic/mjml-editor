@@ -27,7 +27,10 @@ export function beautifyHTML(mjml: string): string | undefined {
             },
         );
 
-        const beautified: string = jsBeautify(replaced, workspace.getConfiguration('mjml-editor').beautify);
+        const beautified: string = jsBeautify(replaced, {
+            max_preserve_newlines: 1,
+            ...workspace.getConfiguration('mjml-editor').beautify,
+        });
 
         if (replaced !== mjml) {
             return beautified.replace(
