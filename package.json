@@ -2,7 +2,7 @@
     "name": "mjml-editor",
     "displayName": "MJML Editor",
     "description": "A Drag&Drop editor for MJML Email templates in VSCode.",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "publisher": "cytostatic-vscode",
     "icon": "mjml-editor-icon.png",
     "repository": {
