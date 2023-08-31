@@ -107,7 +107,7 @@
         "easy-email-editor": "^4.12.2",
         "easy-email-extensions": "^4.14.1",
         "js-beautify": "1.8.8",
-        "ovsx": "^0.8.1",
+        "ovsx": "^0.8.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-final-form": "^6.5.9",
