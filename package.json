@@ -102,7 +102,7 @@
     },
     "dependencies": {
         "@arco-themes/react-easy-email-theme": "^0.0.3",
-        "@types/vscode-webview": "^1.57.1",
+        "@types/vscode-webview": "^1.57.2",
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
         "easy-email-extensions": "^4.14.1",
