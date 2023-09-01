@@ -7,9 +7,20 @@ MJML Drag&Drop Editor for Visual Studio Code. This extension uses [easy-email](h
 * Drag&Drop editor for MJML files
 * Desktop and mobile preview panel.
 
-## Requirements
+## It looks like this
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+![It looks like this](./assets/it-looks-like.gif)
+
+## Usage
+
+Start command palette (with `Ctrl+Shift+P` or `F1`) and start typing `MJML Editor`.
+
+### Available commands
+
+The following command is available:
+
+- MJML Editor: Open MJML Editor
+- MJML Editor: Save MJML Editor
 
 ## Settings
 
@@ -19,9 +30,17 @@ If you have any requirements or dependencies, add a section describing those and
 
 ## Release Notes
 
+### [1.1.0]
+
+- [GH-1](https://github.com/cytostatic/mjml-editor/issues/1) fix: handle syntax errors in mjml file
+- add mjml language support
+- add possiblity to display local image files in ImageBlock
+- add logging
+- refactor message handling
+
 ### [1.0.0]
 
-Initial release
+- Initial release
 
 ## Issues
 

@@ -3,11 +3,15 @@ import { BlockManager, BasicType, AdvancedType, JsonToMjml } from 'easy-email-co
 import { EmailEditor, EmailEditorProvider, IEmailTemplate } from 'easy-email-editor';
 import { BlockAttributeConfigurationManager, ExtensionProps, MjmlToJson, StandardLayout } from 'easy-email-extensions';
 import { useWindowSize } from 'react-use';
+import { messageHandler, Messenger } from '@estruyf/vscode/dist/client';
+import { Log } from './utils/Log';
 
 import 'easy-email-editor/lib/style.css';
 import 'easy-email-extensions/lib/style.css';
 import '@arco-themes/react-easy-email-theme/css/arco.css';
 import './app.css';
+import { Events } from '../types/EventTypes';
+import { EventData } from '@estruyf/vscode';
 
 const defaultCategories: ExtensionProps['categories'] = [
     {
@@ -94,6 +98,8 @@ BlockAttributeConfigurationManager.add({
     ),
 });
 
+let renderTimeout: number;
+
 const App: React.FC = () => {
     const [theme, setTheme] = useState<string>('dark'); // ['light', 'dark'
     const [mjml, setMjml] = useState<IEmailTemplate | null>(null);
@@ -103,43 +109,43 @@ const App: React.FC = () => {
     const smallScene = width < 1400;
 
     useEffect(() => {
-        const vscode = acquireVsCodeApi();
+        Messenger.getVsCodeAPI();
 
-        const messageHandler = (event: MessageEvent) => {
-            const message = event.data;
-            switch (message.command) {
-                case 'mjml-editor.sendFileContent':
-                    setMjml({
-                        subject: '',
-                        subTitle: '',
-                        content: MjmlToJson(message.content) || BlockManager.getBlockByType(BasicType.PAGE)!.create({}),
-                    });
-                    break;
+        const listener = (message: MessageEvent<EventData<unknown>>) => {
+            const event = message.data;
+            if (event.command === Events.GetEditorContent) {
+                if (!formRef.current) {
+                    return;
+                }
 
-                case 'mjml-editor.getEditorContent':
-                    if (!formRef.current) {
-                        break;
-                    }
+                const html = JsonToMjml({
+                    data: formRef.current.content,
+                    mode: 'production',
+                    context: formRef.current.content,
+                });
 
-                    const html = JsonToMjml({
-                        data: formRef.current.content,
-                        mode: 'production',
-                        context: formRef.current.content,
-                    });
-
-                    vscode.postMessage({
-                        command: 'mjml-editor.sendEditorContent',
-                        content: html
-                    });
-                    break;
-
-                default:
-                    break;
-            };
+                messageHandler.send(Events.GetEditorContent, html);
+            }
         };
-        window.addEventListener('message', messageHandler);
+        Messenger.listen<unknown>(listener);
 
-        vscode.postMessage({ command: 'mjml-editor.fetchFileContent' });
+        messageHandler.request<string>(Events.FetchFileContent).then((data) => {
+            let content = BlockManager.getBlockByType(BasicType.PAGE)!.create({});
+            if (data) {
+                try {
+                    content = MjmlToJson(data);
+
+                } catch (error: any) {
+                    Log.error('Failed to parse MJML file content.', error);
+                }
+            }
+
+            setMjml({
+                subject: '',
+                subTitle: '',
+                content: content,
+            });
+        });
 
         applyTheme(document.body.className);
         const observer = new MutationObserver(function (mutations) {
@@ -152,7 +158,7 @@ const App: React.FC = () => {
         observer.observe(target, { attributes: true, attributeFilter: ['class'] });
 
         return () => {
-            window.removeEventListener('message', messageHandler);
+            Messenger.unlisten(listener);
             observer.disconnect();
         };
     }, []);
@@ -162,7 +168,17 @@ const App: React.FC = () => {
     }, [theme]);
 
     const applyTheme = (newTheme: string) => {
-        var prefix = 'vscode-';
+        const classParts = newTheme.split(' ');
+        if (classParts.length > 1) {
+            for (let part of classParts) {
+                if (part === 'vscode-light' || part === 'vscode-dark' || part === 'high-contrast') {
+                    newTheme = part;
+                    break;
+                }
+            }
+        }
+
+        let prefix = 'vscode-';
         if (newTheme.startsWith(prefix)) {
             newTheme = newTheme.substr(prefix.length);
         }
@@ -172,6 +188,77 @@ const App: React.FC = () => {
         }
 
         setTheme(newTheme);
+    };
+
+    const renderEditor = async () => {
+        const container = document.getElementById('easy-email-editor');
+        if (!container) {
+            return;
+        }
+
+        const nodes = Array.from(container.querySelectorAll('*'));
+        const shadowRoots = nodes.map(el => el.shadowRoot).filter(Boolean);
+
+        let images: HTMLImageElement[] = [];
+        if (shadowRoots && shadowRoots.length) {
+            for (let shadowRoot of shadowRoots) {
+                if (!shadowRoot) {
+                    continue;
+                }
+
+                images = [
+                    ...images,
+                    ...Array.from(shadowRoot.querySelectorAll('img')),
+                ];
+            }
+        }
+
+        const iframe = container.querySelectorAll('iframe');
+        if (iframe && iframe.length && iframe[0]) {
+            images = [
+                ...images,
+                ...Array.from(iframe[0].contentDocument!.querySelectorAll('img') || []),
+            ];
+        }
+
+        if (!images.length) {
+            return;
+        }
+
+        for (let image of images) {
+            let src = image.getAttribute('src');
+            let dataSrc = image.getAttribute('data-src');
+            if (dataSrc && src?.startsWith('data:')) {
+                src = dataSrc;
+            }
+            if (!src) {
+                image.removeAttribute('data-src');
+                continue;
+            }
+            image.setAttribute('data-src', src);
+
+            if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('https://easy-email-m-ryan.vercel.app')) {
+                continue;
+            }
+
+            if (src.startsWith('cid:')) {
+                src = src.replace('cid:', '');
+            }
+
+            try {
+                const dataUrl = await messageHandler.request<string>(Events.FetchImage, src);
+                image.setAttribute('src', dataUrl);
+
+            } catch (error) {}
+        }
+    };
+
+    const debouncedRenderEditor = () => {
+        // Hack to display local images
+        window.clearTimeout(renderTimeout);
+        renderTimeout = window.setTimeout(() => {
+            renderEditor();
+        }, 300);
     };
 
     if (!mjml) {
@@ -188,11 +275,13 @@ const App: React.FC = () => {
         >
             {({ values }) => {
                 formRef.current = values;
+                debouncedRenderEditor();
+
                 return (
                     <StandardLayout
                         compact={!smallScene}
                         categories={defaultCategories}
-                        showSourceCode={false}
+                        showSourceCode={true}
                         jsonReadOnly={true}
                         mjmlReadOnly={false}
                     >

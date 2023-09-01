@@ -54,3 +54,7 @@ export function beautifyHTML(mjml: string): string | undefined {
         return;
     }
 }
+
+export const isDebugMode = (): boolean => {
+    return process.env.VSCODE_DEBUG_MODE === 'true';
+};

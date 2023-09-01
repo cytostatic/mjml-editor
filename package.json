@@ -46,6 +46,26 @@
                 "icon": "$(save)"
             }
         ],
+        "languages": [
+            {
+                "id": "mjml",
+                "extensions": [
+                    ".mjml"
+                ],
+                "aliases": [
+                    "MJML",
+                    "mjml"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "mjml",
+                "scopeName": "text.mjml.basic",
+                "path": "./syntaxes/MJML.tmLanguage"
+            }
+        ],
         "menus": {
             "editor/title": [
                 {
@@ -102,11 +122,14 @@
     },
     "dependencies": {
         "@arco-themes/react-easy-email-theme": "^0.0.3",
+        "@estruyf/vscode": "^1.1.0",
+        "@types/mime": "^3.0.1",
         "@types/vscode-webview": "^1.57.2",
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
         "easy-email-extensions": "^4.14.1",
         "js-beautify": "1.8.8",
+        "mime": "^3.0.0",
         "ovsx": "^0.8.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
