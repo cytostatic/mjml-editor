@@ -127,7 +127,7 @@
         "@types/vscode-webview": "^1.57.2",
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
-        "easy-email-extensions": "^4.14.1",
+        "easy-email-extensions": "^4.14.2",
         "js-beautify": "1.8.8",
         "mime": "^3.0.0",
         "ovsx": "^0.8.3",
