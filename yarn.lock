@@ -1214,10 +1214,10 @@ easy-email-editor@^4.12.2:
     react-final-form-arrays "^3.1.3"
     react-use "^17.3.1"
 
-easy-email-extensions@^4.14.1:
-  version "4.14.1"
-  resolved "https://registry.yarnpkg.com/easy-email-extensions/-/easy-email-extensions-4.14.1.tgz#2e45161ed078a82a5918635e5afb325410da86f0"
-  integrity sha512-Ugptc5ivYeElO2HCf9lsCJ2WSEd+I2CyzdkCbCPhhj/d+DbxoN4SPyOIe7WfAwMmyKX6Qu/hxMBeB80bOdhiSA==
+easy-email-extensions@^4.14.2:
+  version "4.14.2"
+  resolved "https://registry.yarnpkg.com/easy-email-extensions/-/easy-email-extensions-4.14.2.tgz#643328b5f86d0f11ac34d8a8e607c8c3c84c5ca5"
+  integrity sha512-MTH+dmL+d/jhnEWLWrWLOphTApe4LHZzhs3QAfZDzu00YzelWQ7/2u41CjSBRZl+/UGC9ZUBQCn0FxL6trBEfQ==
   dependencies:
     "@arco-design/web-react" "^2.36.1"
     codemirror "^5.63.3"
