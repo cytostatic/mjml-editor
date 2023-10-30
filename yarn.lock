@@ -280,10 +280,10 @@
   resolved "https://registry.yarnpkg.com/@types/vscode-webview/-/vscode-webview-1.57.0.tgz#bad5194d45ae8d03afc1c0f67f71ff5e7a243bbf"
   integrity sha512-x3Cb/SMa1IwRHfSvKaZDZOTh4cNoG505c3NjTqGlMC082m++x/ETUmtYniDsw6SSmYzZXO8KBNhYxR0+VqymqA==
 
-"@types/vscode-webview@^1.57.2":
-  version "1.57.2"
-  resolved "https://registry.yarnpkg.com/@types/vscode-webview/-/vscode-webview-1.57.2.tgz#aa6a8cf02c23ef7ce4e5f2d257f52b15ddd8ec78"
-  integrity sha512-RpkIso3+FVoi9hFwHj9uBFO+9p8PGym0LnLJ9Yabo9mUJaV39CzOxz6EVtHg8AidA9hAf4cVmG0c+l9pvw6Lbw==
+"@types/vscode-webview@^1.57.3":
+  version "1.57.3"
+  resolved "https://registry.yarnpkg.com/@types/vscode-webview/-/vscode-webview-1.57.3.tgz#b57608173f12424b0b650b42a3e6c5b45b604a5f"
+  integrity sha512-8at2UVGjA/6gcLOay+J8wOars6VsDqAqPxRHYihH0XFUaXt+2AZ+Hd9hSoUbnhjicb6V1xe7rfjb7j4Ri2n1fg==
 
 "@types/vscode@^1.83.1":
   version "1.83.1"
