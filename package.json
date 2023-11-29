@@ -124,7 +124,7 @@
         "@arco-themes/react-easy-email-theme": "^0.0.3",
         "@estruyf/vscode": "^1.1.0",
         "@types/mime": "^3.0.4",
-        "@types/vscode-webview": "^1.57.2",
+        "@types/vscode-webview": "^1.57.4",
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
         "easy-email-extensions": "^4.14.2",
