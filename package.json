@@ -116,7 +116,7 @@
         "style-loader": "^3.3.3",
         "svg-url-loader": "^8.0.0",
         "ts-loader": "^9.5.0",
-        "typescript": "^5.2.2",
+        "typescript": "^5.3.2",
         "webpack": "^5.89.0",
         "webpack-cli": "^5.1.1"
     },
