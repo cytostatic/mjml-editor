@@ -97,7 +97,7 @@
     },
     "devDependencies": {
         "@types/glob": "^8.1.0",
-        "@types/js-beautify": "^1.13.3",
+        "@types/js-beautify": "^1.14.3",
         "@types/mocha": "^10.0.2",
         "@types/node": "20.8.2",
         "@types/react": "^18.2.38",
@@ -128,7 +128,7 @@
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
         "easy-email-extensions": "^4.14.2",
-        "js-beautify": "1.8.8",
+        "js-beautify": "1.14.11",
         "mime": "^3.0.0",
         "ovsx": "^0.8.3",
         "react": "^18.2.0",
