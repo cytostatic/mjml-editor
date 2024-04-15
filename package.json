@@ -128,7 +128,7 @@
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
         "easy-email-extensions": "^4.14.2",
-        "js-beautify": "1.14.11",
+        "js-beautify": "1.15.1",
         "mime": "^3.0.0",
         "ovsx": "^0.8.3",
         "react": "^18.2.0",
