@@ -100,7 +100,7 @@
         "@types/js-beautify": "^1.14.3",
         "@types/mocha": "^10.0.6",
         "@types/node": "20.12.5",
-        "@types/react": "^18.2.48",
+        "@types/react": "^18.2.78",
         "@types/react-dom": "^18.2.11",
         "@types/vscode": "^1.83.1",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
