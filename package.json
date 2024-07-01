@@ -100,7 +100,7 @@
         "@types/js-beautify": "^1.14.3",
         "@types/mocha": "^10.0.6",
         "@types/node": "20.14.9",
-        "@types/react": "^18.2.48",
+        "@types/react": "^18.3.1",
         "@types/react-dom": "^18.2.11",
         "@types/vscode": "^1.83.1",
         "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -117,7 +117,7 @@
         "svg-url-loader": "^8.0.0",
         "ts-loader": "^9.5.0",
         "typescript": "^5.3.3",
-        "webpack": "^5.89.0",
+        "webpack": "^5.92.1",
         "webpack-cli": "^5.1.1"
     },
     "dependencies": {
@@ -128,10 +128,10 @@
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
         "easy-email-extensions": "^4.14.2",
-        "js-beautify": "1.14.11",
+        "js-beautify": "1.15.1",
         "mime": "^3.0.0",
         "ovsx": "^0.8.3",
-        "react": "^18.2.0",
+        "react": "^18.3.1",
         "react-dom": "^18.2.0",
         "react-final-form": "^6.5.9",
         "react-use": "^17.4.0"
