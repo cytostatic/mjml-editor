@@ -128,12 +128,13 @@
         "easy-email-core": "^4.12.2",
         "easy-email-editor": "^4.12.2",
         "easy-email-extensions": "^4.14.2",
-        "js-beautify": "1.15.1",
+        "js-beautify": "1.8.8",
         "mime": "^3.0.0",
         "ovsx": "^0.8.3",
         "react": "^18.3.1",
         "react-dom": "^18.2.0",
         "react-final-form": "^6.5.9",
         "react-use": "^17.4.0"
-    }
+    },
+    "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 }

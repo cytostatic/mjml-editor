@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import { ExtensionContext, commands, window } from 'vscode';
 import { Editor } from './commands/editor';
+import { Beautify } from './commands/beautify';
 
 let context: ExtensionContext;
 let extensionFeatures: object[] = [];
@@ -12,7 +13,8 @@ export function activate(extensionContext: ExtensionContext) {
     context = extensionContext;
 
     extensionFeatures = [
-        new Editor(context)
+        new Editor(context),
+        new Beautify(context.subscriptions),
     ];
 }
 
