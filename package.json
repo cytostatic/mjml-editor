@@ -10,7 +10,7 @@
         "url": "https://github.com/cytostatic/mjml-editor"
     },
     "engines": {
-        "vscode": "^1.79.0"
+        "vscode": "^1.83.1"
     },
     "categories": [
         "Other"
