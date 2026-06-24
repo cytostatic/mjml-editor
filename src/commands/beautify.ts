@@ -30,7 +30,7 @@ export class Beautify {
                     },
                 },
             ),
-            commands.registerCommand('mjml.beautify', () => {
+            commands.registerCommand('mjml-editor.beautify', () => {
                 this.beautify();
             }),
         );
